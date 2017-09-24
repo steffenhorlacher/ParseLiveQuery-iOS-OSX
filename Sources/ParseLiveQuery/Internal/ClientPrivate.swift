@@ -138,8 +138,8 @@ extension Client: WebSocketDelegate {
 
         // TODO: Better retry logic, unless `disconnect()` was explicitly called
         if !userDisconnected {
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
-                reconnect()
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                self.reconnect()
             }
         }
     }
@@ -149,8 +149,8 @@ extension Client: WebSocketDelegate {
 
         // TODO: Better retry logic, unless `disconnect()` was explicitly called
         if !userDisconnected {
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
-                reconnect()
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                self.reconnect()
             }
         }
     }

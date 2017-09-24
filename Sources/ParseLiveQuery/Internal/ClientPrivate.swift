@@ -116,7 +116,7 @@ func == (first: Client.RequestId, second: Client.RequestId) -> Bool {
 
 extension Client: WebSocketDelegate {
 
-    var reconnectDelay = DispatchTime(1)
+    var reconnectDelay = Double(1)
     
     public func websocketDidReceiveData(socket: WebSocket, data: Data) {
         if shouldPrintWebSocketLog { print("Received binary data but we don't handle it...") }

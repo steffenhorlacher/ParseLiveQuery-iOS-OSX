@@ -24,6 +24,7 @@ open class Client: NSObject {
 
     var socket: WebSocket?
     public var shouldPrintWebSocketLog = true
+    public var reconnectDelay = Double(1)
     public var userDisconnected = false
 
     // This allows us to easily plug in another request ID generation scheme, or more easily change the request id type

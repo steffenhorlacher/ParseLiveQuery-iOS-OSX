@@ -138,8 +138,9 @@ extension Client: WebSocketDelegate {
 
         // TODO: Better retry logic, unless `disconnect()` was explicitly called
         if !userDisconnected {
-            let timer = Timer(timeInterval: 0.5, target: self, selector: "reconnect", userInfo: nil, repeats: false)
-            RunLoop.current.add(timer, forMode: .commonModes)
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+                reconnect()
+            }
         }
     }
 
@@ -148,8 +149,9 @@ extension Client: WebSocketDelegate {
 
         // TODO: Better retry logic, unless `disconnect()` was explicitly called
         if !userDisconnected {
-            let timer = Timer(timeInterval: 0.5, target: self, selector: "reconnect", userInfo: nil, repeats: false)
-            RunLoop.current.add(timer, forMode: .commonModes)
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+                reconnect()
+            }
         }
     }
 }

@@ -116,6 +116,8 @@ func == (first: Client.RequestId, second: Client.RequestId) -> Bool {
 
 extension Client: WebSocketDelegate {
 
+    var reconnectDelay = DispatchTime(1)
+    
     public func websocketDidReceiveData(socket: WebSocket, data: Data) {
         if shouldPrintWebSocketLog { print("Received binary data but we don't handle it...") }
     }
@@ -138,7 +140,7 @@ extension Client: WebSocketDelegate {
 
         // TODO: Better retry logic, unless `disconnect()` was explicitly called
         if !userDisconnected {
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + reconnectDelay) {
                 self.reconnect()
             }
         }
@@ -149,7 +151,7 @@ extension Client: WebSocketDelegate {
 
         // TODO: Better retry logic, unless `disconnect()` was explicitly called
         if !userDisconnected {
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + reconnectDelay) {
                 self.reconnect()
             }
         }
